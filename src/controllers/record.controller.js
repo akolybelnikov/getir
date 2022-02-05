@@ -21,14 +21,10 @@ const getRecords = catchAsync(async (req, res) => {
     },
   };
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  options.limit = 100;
+  if (!options.limit) options.limit = 100;
   const result = await recordService.queryRecords(filter, options);
   const { paginatedResults } = result;
-  const records = paginatedResults.map((r) => {
-    // eslint-disable-next-line no-param-reassign
-    delete r._id;
-    return r;
-  });
+  const records = paginatedResults.map((r) => ({ createdAt: r.createdAt, key: r.key, totalCount: r.totalCount }));
   const response = { code: httpStatus.OK, msg: 'Success', records };
   res.send(response);
 });
