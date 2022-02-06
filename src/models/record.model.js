@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { queryByCounts } = require('./plugins');
 
-const recordSchema = mongoose.Schema(
+const recordSchema = new mongoose.Schema(
   {
     createdAt: {
       type: Date,

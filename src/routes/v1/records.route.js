@@ -30,21 +30,25 @@ module.exports = router;
  *         name: startDate
  *         schema:
  *           type: string
+ *           example: '2016-01-03'
  *         description: Start date
  *       - in: query
  *         name: endDate
  *         schema:
  *           type: string
+ *           example: '2016-01-03'
  *         description: End date
  *       - in: query
  *         name: minCount
  *         schema:
  *           type: integer
+ *           example: 3000
  *         description: lower bound of aggregated counts
  *       - in: query
  *         name: maxCount
  *         schema:
  *           type: integer
+ *           example: 5000
  *         description: upper bound of aggregated counts
  *     responses:
  *       "200":
@@ -52,11 +56,23 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Record'
+ *                $ref: '#/components/responses/Records'
  *       "400":
- *         $ref: '#/components/responses/BadRequest'
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/responses/BadRequest'
  *       "404":
- *         $ref: '#/components/responses/NotFound'
+ *         description: Not Found
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/responses/NotFound'
  *       "500":
- *         $ref: '#/components/responses/ServerError'
+ *         description: Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/responses/ServerError'
  */

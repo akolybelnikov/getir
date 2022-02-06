@@ -9,7 +9,7 @@ const config = require('./config/config');
 const morgan = require('./config/morgan');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
-const ApiError = require('./utils/ApiError');
+const ApiError = require('./utils/apiError');
 
 const app = express();
 

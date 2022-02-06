@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  node-app:
-    env_file:
-      - ./.env.test
-    container_name: node-app-test
-    command: yarn test
