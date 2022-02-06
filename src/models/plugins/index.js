@@ -1,1 +1,1 @@
-module.exports.paginate = require('./paginate.plugin');
+module.exports.queryByCounts = require('./queryByCounts.plugin');

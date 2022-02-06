@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { paginate } = require('./plugins');
+const { queryByCounts } = require('./plugins');
 
 const recordSchema = mongoose.Schema(
   {
@@ -23,7 +23,7 @@ const recordSchema = mongoose.Schema(
 );
 
 // add plugin that paginates query results
-recordSchema.plugin(paginate);
+recordSchema.plugin(queryByCounts);
 
 /**
  * @typedef Record

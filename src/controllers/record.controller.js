@@ -1,5 +1,4 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const recordService = require('../services/record.service');
@@ -9,22 +8,8 @@ const getRecords = catchAsync(async (req, res) => {
   if (!startDate || !endDate || !minCount || !maxCount) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Missing required query parameters.');
   }
-  const filter = {
-    project: {
-      createdAt: '$createdAt',
-      key: '$key',
-      totalCount: { $sum: '$counts' },
-    },
-    match: {
-      createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
-      totalCount: { $gte: parseInt(minCount, 10), $lte: parseInt(maxCount, 10) },
-    },
-  };
-  const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  if (!options.limit) options.limit = 100;
-  const result = await recordService.queryRecords(filter, options);
-  const { paginatedResults } = result;
-  const records = paginatedResults.map((r) => ({ createdAt: r.createdAt, key: r.key, totalCount: r.totalCount }));
+  const result = await recordService.queryRecords({ startDate, endDate, minCount, maxCount });
+  const records = result.map((r) => ({ createdAt: r.createdAt, key: r.key, totalCount: r.totalCount }));
   const response = { code: httpStatus.OK, msg: 'Success', records };
   res.send(response);
 });
